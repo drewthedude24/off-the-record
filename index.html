@@ -18,7 +18,7 @@
   --pad:clamp(1.15rem,5vw,2rem);
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-padding-top:4.5rem;scroll-behavior:smooth;scrollbar-color:var(--ink) var(--paper-2);-webkit-text-size-adjust:100%}
+html{scroll-padding-top:5rem;scroll-behavior:smooth;scrollbar-color:var(--ink) var(--paper-2);-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:1.09rem;line-height:1.65;font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;caret-color:var(--red)}
 ::selection{background:var(--ink);color:var(--paper)}
@@ -34,7 +34,12 @@ a:hover{text-decoration-thickness:.16em}
 
 /* top bar */
 .top{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--rule)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.6rem}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.25rem;padding-block:.6rem}
+.pages{display:flex;gap:1.25rem;margin-left:auto;font-size:.95rem;font-weight:500}
+.pages a{text-decoration:none;padding:.35rem 0;border-bottom:2px solid transparent;white-space:nowrap}
+.pages a:hover{color:var(--red)}
+.pages a[aria-current]{border-bottom-color:var(--red)}
+@media (max-width:600px){html{scroll-padding-top:7.25rem}.help-btn{margin-left:auto}.pages{order:3;width:100%;margin-left:0;gap:1.5rem;border-top:1px solid var(--rule);padding-top:.15rem}}
 .mark{font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:600;font-size:1.3rem;line-height:1;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
 .help-btn{background:var(--ink);color:var(--on-ink);font-weight:600;font-size:.95rem;padding:.6rem 1.1rem;border-radius:999px;text-decoration:none;white-space:nowrap;transition:background .2s}
 .help-btn:hover{background:var(--red)}
@@ -130,13 +135,40 @@ footer p{margin-top:.8rem}
 .refs a{overflow-wrap:anywhere}
 .end{margin-top:2rem;font-size:.9rem;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:.4rem 2rem;justify-content:space-between}
 
+
+/* program page */
+.hero .lede{margin-top:1.1rem;font-size:1.15rem;max-width:38rem}
+.go{display:inline-block;margin-top:1.4rem;font-weight:600;text-decoration:none;border:1.5px solid var(--ink);border-radius:999px;padding:.55rem 1.15rem;transition:background .2s,color .2s}
+.go:hover{background:var(--ink);color:var(--paper)}
+.sched{margin-top:1.5rem;border-top:1px solid var(--rule)}
+.sched li{display:grid;grid-template-columns:3.9rem 1fr;padding:1.05rem 0 1.15rem;border-bottom:1px solid var(--rule)}
+.sched time{font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:500;font-size:1.45rem;line-height:1.2;color:var(--red);font-variant-numeric:tabular-nums}
+.sched p{margin-top:.3rem}
+.sub{margin-top:2rem}
+.sub+p{margin-top:.4rem}
+.videos{margin-top:1.6rem;display:grid;gap:2rem 1.5rem}
+@media (min-width:44rem){.videos{grid-template-columns:1fr 1fr}}
+.frame{position:relative;aspect-ratio:16/9;background:var(--ink);border-radius:14px;overflow:hidden}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.play{position:absolute;inset:0;width:100%;border:0;background:none;color:var(--on-ink);font:inherit;cursor:pointer;display:grid;place-content:center;justify-items:center;gap:.7rem;padding:1rem}
+.play i{display:grid;place-items:center;width:4rem;height:4rem;border-radius:50%;background:var(--on-ink);color:var(--ink);transition:transform .35s var(--ease),background .2s}
+.play:hover i,.play:focus-visible i{transform:scale(1.06);background:#fff}
+.play span{font-size:.9rem;color:var(--on-ink-2)}
+.play:focus-visible{outline:3px solid var(--red);outline-offset:-6px}
+.vid h3{margin-top:.85rem}
+.vid p{margin-top:.25rem}
+.vid .who{color:var(--ink-2);font-size:.95rem}
+.vid .src{margin-top:.45rem}
+@media (prefers-reduced-motion:reduce){.play i{transition:none}}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#why">Skip to the content</a>
 <header class="top"><div class="wrap">
-  <a class="mark" href="#top">Off the Record</a>
-  <a class="help-btn" href="#help">Talk to a person</a>
+  <a class="mark" href="index.html">Off the Record</a>
+  <nav class="pages" aria-label="Pages"><a href="index.html" aria-current="page">For athletes</a><a href="program.html">The program</a></nav>
+  <a class="help-btn" href="index.html#help">Talk to a person</a>
 </div></header>
 
 <main id="top">
@@ -149,6 +181,7 @@ footer p{margin-top:.8rem}
     <li><a href="#check">Check a supplement <span>4 steps, about a minute</span></a></li>
     <li><a href="#change">What should change <span>our call to action</span></a></li>
     <li><a href="#help">Talk to a person <span>phone numbers that pick up</span></a></li>
+    <li><a href="program.html">The program <span>workshops, interviews, for coaches</span></a></li>
   </ul></nav>
 </div>
 
@@ -284,15 +317,8 @@ footer p{margin-top:.8rem}
     <li><h3>Universities</h3><p>Pay for confidential counseling that sits outside athletics, and keep an anonymous resource like this one online.</p>
       <p class="src">Why: NCAA rules make athletic staff act on what they learn about banned substances, so athletes need somewhere else to go first.</p></li>
   </ul>
-  <div class="more" style="border-top:0;margin-top:0">
-  <details><summary><b>Our 30-minute team session</b><i>A plan any team can run</i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 1v14M1 8h14"/></svg></summary><div class="inside">
-    <p>A current or former athlete runs it, and the coaches stay out of the room. The peer-led part comes from ATLAS, a high school program where student team leaders ran sessions with their coaches.</p>
-    <p><b>0:00, Guess the number.</b> Everyone writes down what share of college athletes they think used a performance enhancer last year. Then put the survey answer on the board, which is under 1%. If the guesses land way above it, talk about why.</p>
-    <p><b>0:05, The pressures.</b> In small groups, pick the pressure from this page that fits your sport and talk about what it sounds like on your team. Nobody has to talk about themselves.</p>
-    <p><b>0:15, Read the tub.</b> Pass around two real supplement containers and count the red flags on each label.</p>
-    <p><b>0:25, Who would you tell.</b> Each person writes down one name outside the team and saves two phone numbers from this page.</p>
-  </div></details>
-  </div>
+  <p class="lede">We turned these asks into a program: peer-led workshops, interviews, and a guide for coaches.</p>
+  <a class="go" href="program.html">See the program</a>
   <p class="src">Sources: Castaldelli-Maia et al., 2019; Goldberg et al., 1996 and 2000; NCAA Bylaw 10.2, as printed in the Drug-Testing Manual.</p>
 </section>
 
